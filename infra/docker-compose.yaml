@@ -3,8 +3,8 @@ services:
     image: mysql:8.4
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-    #ports:
-    #  - "3306:3306"
+    ports:
+      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
@@ -50,6 +50,17 @@ services:
     volumes:
       - redis_data:/data
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    command: start-dev --import-realm
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+
   user-service:
     build: ../user-service
     depends_on:
@@ -84,6 +95,22 @@ services:
       REDIS_PORT: 6379
       GROQ_API_KEY: ${GROQ_API_KEY}
 
+  budget-service:
+    build: ../budget-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    ports:
+      - "8093:8093"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/expense_tracker_budget_db
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+
   notification-service:
     build: ../notification-service
     depends_on:
@@ -100,19 +127,59 @@ services:
       MAIL_USERNAME: ${MAIL_USERNAME}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
 
+  analytics-service:
+    build: ../analytics-service
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    ports:
+      - "8094:8094"
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/expense_tracker_analytics_db
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET}
+
   api-gateway:
     build: ../api-gateway
     depends_on:
       - user-service
       - expense-service
+      - budget-service
       - notification-service
+      - analytics-service
+      - redis
     ports:
       - "8081:8081"
     environment:
       USER_SERVICE_URL: http://user-service:8090
       EXPENSE_SERVICE_URL: http://expense-service:8091
+      BUDGET_SERVICE_URL: http://budget-service:8093
       NOTIFICATION_SERVICE_URL: http://notification-service:8092
-      
+      ANALYTICS_SERVICE_URL: http://analytics-service:8094
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - grafana_data:/var/lib/grafana
 
   frontend:
     build: ../expense-tracker-frontend
@@ -125,3 +192,5 @@ volumes:
   mysql_data:
   mongo_data:
   redis_data:
+  keycloak_data:
+  grafana_data:
