@@ -1,0 +1,77 @@
+.page-header {
+    margin-bottom: 1.5rem;
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; margin: 0 0 0.2rem; color: var(--text); }
+    .page-sub { color: var(--text-muted); margin: 0; font-size: 0.9rem; }
+  }
+  
+  .add-panel {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin-bottom: 1.8rem;
+    color: var(--text);
+  
+    form {
+      display: grid;
+      grid-template-columns: 1fr 130px 1.5fr 150px auto;
+      gap: 0.7rem;
+      align-items: center;
+    }
+  
+    input {
+      padding: 0.55rem 0.7rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 0.87rem;
+      font-family: 'Inter', sans-serif;
+      background: var(--paper-raised);
+      color: var(--text);
+  
+      &:focus { outline: none; border-color: var(--amber); }
+    }
+  
+    button {
+      background: var(--ink);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      white-space: nowrap;
+  
+      &:disabled { opacity: 0.6; cursor: not-allowed; }
+    }
+  }
+  
+  .ledger {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    color: var(--text);
+  
+    th, td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.85rem;
+      text-align: left;
+    }
+  
+    th {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+  
+    .right { text-align: right; }
+    tr:last-child td { border-bottom: none; }
+  }
+  
+  .empty { color: var(--text-muted); font-size: 0.88rem; font-style: italic; }

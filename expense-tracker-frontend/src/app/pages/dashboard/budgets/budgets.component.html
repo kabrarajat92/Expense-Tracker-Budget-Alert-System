@@ -1,0 +1,36 @@
+<div class="page">
+    <div class="page-header">
+      <h1>Budgets</h1>
+      <p class="page-sub">Set a monthly limit per category.</p>
+    </div>
+  
+    <div class="add-panel">
+      <form (ngSubmit)="saveBudget()">
+        <input type="text" [(ngModel)]="newBudget.category" name="category" placeholder="Category" />
+        <input type="number" [(ngModel)]="newBudget.limitAmount" name="limitAmount" placeholder="Monthly limit (₹)" />
+        <button type="submit" [disabled]="saving">{{ saving ? 'Saving...' : 'Save budget' }}</button>
+      </form>
+    </div>
+  
+    <div class="budget-cards" *ngIf="budgets.length > 0">
+      <div class="budget-card" *ngFor="let b of budgets">
+        <div class="budget-card-top">
+          <span class="category">{{ b.category }}</span>
+          <span class="mono limit">₹{{ b.limitAmount | number:'1.0-0' }}</span>
+        </div>
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            [style.width.%]="pctFor(b.category, b.limitAmount)"
+            [class.over]="pctFor(b.category, b.limitAmount) >= 100"
+            [class.near]="pctFor(b.category, b.limitAmount) >= 80 && pctFor(b.category, b.limitAmount) < 100"
+          ></div>
+        </div>
+        <div class="budget-card-bottom">
+          <span class="mono">₹{{ spentFor(b.category) | number:'1.0-0' }} spent</span>
+          <span class="mono">{{ pctFor(b.category, b.limitAmount) | number:'1.0-0' }}%</span>
+        </div>
+      </div>
+    </div>
+    <p class="empty" *ngIf="budgets.length === 0">No budgets set yet. Add one above to start tracking.</p>
+  </div>

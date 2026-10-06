@@ -1,0 +1,50 @@
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--paper);
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+:root {
+  --ink: #14213D;
+  --paper: #12141C;
+  --paper-raised: #1B1E2C;
+  --line: #2B2F42;
+  --text: #EDEAE3;
+  --text-muted: #8E93A3;
+
+  --green: #4FAE7C;
+  --green-bg: rgba(79, 174, 124, 0.14);
+  --amber: #DB9354;
+  --amber-bg: rgba(219, 147, 84, 0.14);
+  --red: #E07567;
+  --red-bg: rgba(224, 117, 103, 0.14);
+}
+
+html.light-theme {
+  --ink: #14213D;
+  --paper: #F7F5F0;
+  --paper-raised: #FFFFFF;
+  --line: #E4E0D6;
+  --text: #14213D;
+  --text-muted: #6B6558;
+
+  --green: #2F6F4E;
+  --green-bg: #E8F0EA;
+  --amber: #C97B2E;
+  --amber-bg: #FBF0E4;
+  --red: #B3432B;
+  --red-bg: #FBEAE5;
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+button {
+  font-family: 'Inter', sans-serif;
+}

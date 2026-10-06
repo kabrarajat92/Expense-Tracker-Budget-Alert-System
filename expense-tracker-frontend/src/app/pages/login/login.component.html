@@ -1,0 +1,62 @@
+<div class="auth-shell">
+    <div class="auth-visual">
+      <div class="visual-content">
+        <div class="brand">
+          <span class="brand-mark">₹</span>
+          <span class="brand-name">Expense Tracker</span>
+        </div>
+  
+        <p class="tagline">Every rupee, accounted for.</p>
+  
+        <div class="ledger-preview">
+          <div class="ledger-row" *ngFor="let row of previewRows">
+            <span class="ledger-cat">{{ row.category }}</span>
+            <span class="ledger-amt mono">₹{{ row.amount }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="auth-form-panel">
+      <div class="form-wrap">
+        <h1>Sign in</h1>
+        <p class="subtitle">Welcome back — your ledger's waiting.</p>
+  
+        <form (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              placeholder="Enter your username"
+              autocomplete="username"
+            />
+          </div>
+  
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            />
+          </div>
+  
+          <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  
+          <button type="submit" [disabled]="isLoading">
+            {{ isLoading ? 'Signing in...' : 'Sign in' }}
+          </button>
+        </form>
+  
+        <p class="switch-link">
+          New here? <a routerLink="/register">Create an account</a>
+        </p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,121 @@
+.page-header {
+    margin-bottom: 1.8rem;
+  
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      margin: 0 0 0.2rem;
+    }
+  
+    .page-sub {
+      color: var(--text-muted);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stat {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  
+    &.warn {
+      border-color: var(--amber);
+      background: var(--amber-bg);
+    }
+  }
+  
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .section {
+    margin-bottom: 2.2rem;
+  
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      margin: 0 0 0.9rem;
+    }
+  }
+  
+  .budget-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 160px;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.85rem;
+  
+    &:last-child { border-bottom: none; }
+  }
+  
+  .budget-category { font-weight: 500; }
+  
+  .progress-track {
+    height: 6px;
+    background: var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: var(--green);
+  
+    &.near { background: var(--amber); }
+    &.over { background: var(--red); }
+  }
+  
+  .budget-figure {
+    text-align: right;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  
+  .ledger {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  
+    td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.85rem;
+    }
+  
+    tr:last-child td { border-bottom: none; }
+  
+    .ledger-date { color: var(--text-muted); width: 110px; }
+    .ledger-category { font-weight: 500; width: 120px; }
+    .ledger-amount { text-align: right; }
+  }
+  
+  .empty {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    font-style: italic;
+  }

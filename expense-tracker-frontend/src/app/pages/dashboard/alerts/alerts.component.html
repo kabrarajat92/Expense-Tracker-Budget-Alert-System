@@ -1,0 +1,18 @@
+<div class="page">
+    <div class="page-header">
+      <h1>Alerts</h1>
+      <p class="page-sub">Triggered whenever a category crosses 80% of budget.</p>
+    </div>
+  
+    <div class="alert-list" *ngIf="notifications.length > 0">
+      <div class="alert-card" *ngFor="let n of notifications" [class.read]="n.read">
+        <div class="alert-main">
+          <span class="alert-category">{{ n.category }}</span>
+          <span class="alert-detail mono">₹{{ n.totalSpent | number:'1.0-0' }} of ₹{{ n.budgetLimit | number:'1.0-0' }} — {{ n.percentageUsed | number:'1.0-0' }}%</span>
+        </div>
+        <button *ngIf="!n.read" (click)="markRead(n.id)">Mark read</button>
+        <span class="read-tag" *ngIf="n.read">Read</span>
+      </div>
+    </div>
+    <p class="empty" *ngIf="notifications.length === 0">No alerts yet. You'll see one here when a budget crosses 80%.</p>
+  </div>

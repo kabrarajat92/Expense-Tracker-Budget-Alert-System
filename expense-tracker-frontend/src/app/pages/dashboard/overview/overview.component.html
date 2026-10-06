@@ -1,0 +1,52 @@
+<div class="page">
+    <div class="page-header">
+      <h1>Overview</h1>
+      <p class="page-sub">Where your money's been going.</p>
+    </div>
+  
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-label">Total spent</span>
+        <span class="stat-value mono">₹{{ totalSpent | number:'1.0-2' }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Total budgeted</span>
+        <span class="stat-value mono">₹{{ totalBudgeted | number:'1.0-2' }}</span>
+      </div>
+      <div class="stat" [class.warn]="unread.length > 0">
+        <span class="stat-label">Open alerts</span>
+        <span class="stat-value mono">{{ unread.length }}</span>
+      </div>
+    </div>
+  
+    <div class="section" *ngIf="budgets.length > 0">
+      <h2>Budget standing</h2>
+      <div class="budget-row" *ngFor="let b of budgets">
+        <span class="budget-category">{{ b.category }}</span>
+        <div class="progress-track">
+          <div
+            class="progress-fill"
+            [style.width.%]="budgetStatus(b.category).pct"
+            [class.over]="budgetStatus(b.category).pct >= 100"
+            [class.near]="budgetStatus(b.category).pct >= 80 && budgetStatus(b.category).pct < 100"
+          ></div>
+        </div>
+        <span class="budget-figure mono">₹{{ budgetStatus(b.category).spent | number:'1.0-0' }} / ₹{{ b.limitAmount | number:'1.0-0' }}</span>
+      </div>
+    </div>
+  
+    <div class="section">
+      <h2>Recent entries</h2>
+      <table class="ledger" *ngIf="recentExpenses.length > 0">
+        <tbody>
+          <tr *ngFor="let e of recentExpenses">
+            <td class="ledger-date mono">{{ e.expenseDate }}</td>
+            <td class="ledger-category">{{ e.category }}</td>
+            <td class="ledger-desc">{{ e.description }}</td>
+            <td class="ledger-amount mono">₹{{ e.amount | number:'1.0-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="empty" *ngIf="recentExpenses.length === 0">No expenses logged yet. Head to Expenses to add your first one.</p>
+    </div>
+  </div>

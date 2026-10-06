@@ -1,0 +1,148 @@
+.shell {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 220px;
+    background: var(--ink);
+    color: #F7F5F0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 0.5rem 1.8rem;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  .brand-mark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.2rem;
+    color: #C97B2E;
+    border: 1px solid rgba(247, 245, 240, 0.25);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+  }
+  
+  .brand-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+  
+    a {
+      color: rgba(247, 245, 240, 0.65);
+      text-decoration: none;
+      padding: 0.6rem 0.7rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-left: 2px solid transparent;
+      transition: all 0.15s ease;
+  
+      &:hover {
+        color: #F7F5F0;
+        background: rgba(247, 245, 240, 0.06);
+      }
+  
+      &.active {
+        color: #F7F5F0;
+        background: rgba(247, 245, 240, 0.08);
+        border-left: 2px solid #C97B2E;
+      }
+    }
+  }
+  
+  .sidebar-footer {
+    border-top: 1px solid rgba(247, 245, 240, 0.12);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  
+  .user-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .user-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(247, 245, 240, 0.1);
+    border: 1px solid rgba(247, 245, 240, 0.25);
+    color: #C97B2E;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .user-name {
+    font-size: 0.82rem;
+    color: rgba(247, 245, 240, 0.55);
+    font-family: 'IBM Plex Mono', monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .logout {
+    background: transparent;
+    border: 1px solid rgba(247, 245, 240, 0.2);
+    color: #F7F5F0;
+    padding: 0.45rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    cursor: pointer;
+  
+    &:hover {
+      background: rgba(247, 245, 240, 0.08);
+    }
+  }
+  
+  .content {
+    margin-left: 220px;
+    flex: 1;
+    padding: 2rem 2.5rem;
+    max-width: 1100px;
+  }
+
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid rgba(247, 245, 240, 0.2);
+    color: #F7F5F0;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    text-align: left;
+  
+    &:hover {
+      background: rgba(247, 245, 240, 0.08);
+    }
+  }

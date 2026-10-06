@@ -1,0 +1,35 @@
+<div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">₹</span>
+        <span class="brand-name">Expense Tracker</span>
+      </div>
+  
+      <nav>
+        <a routerLink="/dashboard/overview" routerLinkActive="active">Overview</a>
+        <a routerLink="/dashboard/expenses" routerLinkActive="active">Expenses</a>
+        <a routerLink="/dashboard/budgets" routerLinkActive="active">Budgets</a>
+        <a routerLink="/dashboard/alerts" routerLinkActive="active">Alerts</a>
+        <a routerLink="/dashboard/assistant" routerLinkActive="active">Assistant</a>
+      </nav>
+  
+      <div class="sidebar-footer">
+        <button class="theme-toggle" (click)="themeService.toggle()">
+          <span *ngIf="!themeService.isLight()">☀️ Light mode</span>
+          <span *ngIf="themeService.isLight()">🌙 Dark mode</span>
+        </button>
+        <div class="user-chip">
+            <span class="user-avatar">{{ userInitial }}</span>
+            <span class="user-name">{{ username }}</span>
+        </div>
+        <button class="logout" (click)="logout()">Sign out</button>
+      </div>
+    </aside>
+  
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+    
+
+  </div>

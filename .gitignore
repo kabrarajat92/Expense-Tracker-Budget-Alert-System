@@ -1,0 +1,32 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Eclipse / STS
+.metadata/
+
+# Java / Maven
+target/
+*.class
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+.cache/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+*.bak

@@ -1,0 +1,33 @@
+<div class="page assistant-page">
+    <div class="page-header">
+      <h1>Assistant</h1>
+      <p class="page-sub">Powered by Groq, grounded in your actual spending data.</p>
+    </div>
+  
+    <div class="quick-actions">
+      <button (click)="quickAnalyze()" [disabled]="loading">Analyze my spending</button>
+      <button (click)="quickForecast()" [disabled]="loading">Forecast this month</button>
+    </div>
+  
+    <div class="chat-window">
+      <div class="chat-messages">
+        <div class="message" *ngFor="let m of messages" [class.user]="m.role === 'user'">
+          <div class="bubble" [innerText]="m.text"></div>
+        </div>
+        <div class="message" *ngIf="loading">
+          <div class="bubble typing">Thinking...</div>
+        </div>
+      </div>
+  
+      <form class="chat-input" (ngSubmit)="send()">
+        <input
+          type="text"
+          [(ngModel)]="currentMessage"
+          name="currentMessage"
+          placeholder="Ask about your spending..."
+          [disabled]="loading"
+        />
+        <button type="submit" [disabled]="loading">Send</button>
+      </form>
+    </div>
+  </div>
